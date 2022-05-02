@@ -1,0 +1,8 @@
+asgiref==3.3.1
+Django==3.1.5
+djangorestframework==3.12.2
+pytz==2020.5
+sqlparse==0.4.1
+psycopg2-binary
+drf-extensions==0.4.0
+google-cloud-tasks==0.4.0

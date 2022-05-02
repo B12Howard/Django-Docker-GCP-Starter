@@ -1,0 +1,14 @@
+runtime: python37
+
+handlers:
+  - url: /static
+    static_dir: static/
+  - url: .*
+    script: auto
+
+env_variables:
+  POSTGRESQL_CONNECTION_NAME: app-307523:us-central1:appdb
+  POSTGRES_DB: [appdb]
+  POSTGRES_PASSWORD: [somepassword]
+  POSTGRES_USER: [appdbuser]
+  POSTGRES_HOST: [35.238.200.155]

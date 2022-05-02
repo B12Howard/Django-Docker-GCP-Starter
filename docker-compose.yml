@@ -1,0 +1,45 @@
+version: "3.7"
+
+# services:
+#   web:
+#     build: .
+#     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+#     container_name: api
+#     volumes:
+#       - .:/app
+#     ports:
+#       - "8000:8000"
+# version: '3'
+
+services:
+  db:
+    image: postgres:11
+    restart: always
+    env_file:
+      - local.envs
+    ports:
+      - "5436:5436"
+    expose:
+      - "5436"
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  backend:
+    env_file:
+      - local.envs
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+    depends_on:
+      - db
+    command: python3 manage.py runserver 0.0.0.0:8000
+
+volumes:
+  data:
+    external: true
